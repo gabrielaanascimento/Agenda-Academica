@@ -85,12 +85,25 @@ export default function DashboardLayout({ children }) {
           </div>
           <span>Agenda Acadêmica</span>
         </Link>
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="p-2 rounded-lg text-slate-600 hover:bg-slate-100"
-        >
-          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+
+        <div className="flex items-center gap-1">
+          <button
+            onClick={logout}
+            title="Sair"
+            aria-label="Sair"
+            className="p-2 rounded-lg text-slate-500 hover:text-red-600 hover:bg-red-50 transition"
+          >
+            <LogOut className="w-5 h-5" />
+          </button>
+
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Abrir menu"
+            className="p-2 rounded-lg text-slate-600 hover:bg-slate-100"
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </header>
 
       {/* Backdrop Mobile */}
@@ -103,11 +116,11 @@ export default function DashboardLayout({ children }) {
 
       {/* Sidebar */}
       <aside
-        className={`fixed lg:sticky top-0 left-0 z-40 h-screen w-72 bg-white border-r border-slate-200 flex flex-col transition-transform duration-200 ${
+        className={`fixed inset-y-0 left-0 z-40 h-[100dvh] lg:sticky lg:top-0 lg:h-screen w-72 bg-white border-r border-slate-200 flex flex-col transition-transform duration-200 ${
           mobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}
       >
-        <div className="p-5 border-b border-slate-100 flex items-center gap-3">
+        <div className="p-5 border-b border-slate-100 flex items-center gap-3 shrink-0">
           <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-sm">
             <CalendarDays className="w-5 h-5" />
           </div>
@@ -118,7 +131,7 @@ export default function DashboardLayout({ children }) {
         </div>
 
         {/* Botões de Ação Rápida */}
-        <div className="p-4 space-y-2 border-b border-slate-100">
+        <div className="p-4 space-y-2 border-b border-slate-100 shrink-0">
           <button
             onClick={() => {
               setMobileMenuOpen(false);
@@ -145,7 +158,7 @@ export default function DashboardLayout({ children }) {
         </div>
 
         {/* Navegação */}
-        <nav className="flex-1 overflow-y-auto p-4 space-y-1">
+        <nav className="flex-1 min-h-0 overflow-y-auto p-4 space-y-1">
           {navItems.map((item) => {
             const Icon = item.icon;
             const active = pathname === item.href;
@@ -203,7 +216,7 @@ export default function DashboardLayout({ children }) {
         </nav>
 
         {/* Perfil e Logout */}
-        <div className="p-4 border-t border-slate-200 bg-slate-50/60">
+        <div className="p-4 border-t border-slate-200 bg-slate-50/60 shrink-0">
           <div className="flex items-center justify-between gap-2">
             <div className="min-w-0">
               <p className="text-sm font-semibold text-slate-900 truncate">{user.nome}</p>
@@ -218,9 +231,10 @@ export default function DashboardLayout({ children }) {
             <button
               onClick={logout}
               title="Sair"
-              className="p-2 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-xl transition"
+              className="px-2.5 py-2 text-xs font-semibold text-red-600 hover:bg-red-50 rounded-xl transition flex items-center gap-1.5 shrink-0"
             >
-              <LogOut className="w-5 h-5" />
+              <LogOut className="w-4 h-4" />
+              <span>Sair</span>
             </button>
           </div>
         </div>
